@@ -74,11 +74,11 @@
     <distributionManagement>
         <repository>
             <id>nexus-releases</id>
-            <url>http://localhost:8081/repository/maven-releases/</url>
+            <url>http://localhost:8081/repository/myorg-maven-hosted-repo/</url>
         </repository>
         <snapshotRepository>
             <id>nexus-snapshots</id>
-            <url>http://localhost:8081/repository/maven-snapshots/</url>
+            <url>http://localhost:8081/repository/myorg-maven-hosted-repo/</url>
         </snapshotRepository>
     </distributionManagement>
 </project>
