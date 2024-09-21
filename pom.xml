@@ -7,6 +7,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.deploy.skip>false</maven.deploy.skip>
     </properties>
 
     <dependencies>
@@ -46,28 +47,51 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.3.0</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>view.CounterView</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
+   <build>
+    <plugins>
+        <!-- Maven Jar Plugin -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.3.0</version>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <addClasspath>true</addClasspath>
+                        <mainClass>view.CounterView</mainClass>
+                    </manifest>
+                </archive>
+            </configuration>
+        </plugin>
 
-            <!-- Maven Surefire Plugin for running tests -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version> <!-- hoặc phiên bản mới hơn nếu có -->
-            </plugin>
-        </plugins>
-    </build>
+        <!-- Maven Surefire Plugin for running tests -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.0.0-M5</version>
+        </plugin>
+
+        <!-- Maven Deploy Plugin for Nexus -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-deploy-plugin</artifactId>
+            <version>2.8.2</version> <!-- hoặc phiên bản mới hơn nếu có -->
+            <configuration>
+                <repositoryId>nexus</repositoryId> <!-- ID repository trong Jenkins -->
+                <url>http://localhost:8081/repository/maven-snapshots/</url> <!-- URL Nexus Repository -->
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+<distributionManagement>
+    <snapshotRepository>
+        <id>nexus</id>
+        <url>http://localhost:8081/repository/maven-snapshots/</url>
+    </snapshotRepository>
+    <repository>
+        <id>nexus</id>
+        <url>http://localhost:8081/repository/maven-releases/</url>
+    </repository>
+</distributionManagement>
+
 </project>
