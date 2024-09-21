@@ -7,6 +7,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        
     </properties>
 
     <dependencies>
@@ -69,6 +70,16 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <version>3.0.0-M5</version>
         </plugin>
+<distributionManagement>
+    <snapshotRepository>
+        <id>nexus</id>
+        <url>http://localhost:8081/repository/maven-snapshots/</url>
+    </snapshotRepository>
+    <repository>
+        <id>nexus</id>
+        <url>http://localhost:8081/repository/maven-releases/</url>
+    </repository>
+</distributionManagement>
 
        
 
